@@ -26,7 +26,6 @@ var y = d3.scale.linear().range([h, 0]);
 //You may read about here: https://github.com/mbostock/d3/wiki/Time-Formatting
 var parseDate = d3.time.format("%Y-%m-%d").parse;
 
-
 // Scale the range of the data
 x.domain(d3.extent(dataset, function(d) { return parseDate(d[0]); }));
 y.domain([0, d3.max(dataset, function(d) { return d[1]; })]);
@@ -94,16 +93,16 @@ svg.selectAll("dot")
     //Uncomment the block belo and complete the tooltip code!
     // .on("mouseover", function(/*ARGS*/) {    
     //         /*ELEMENT*/.transition()    
-    //             .duration(200)    
-    //             .style("opacity", .9);    
+    //             .duration(/*LENGTH*/)    
+    //             .style(/*STYLE*/);    
     //         /*ELEMENT*/.html(/*TEXT*/  
     //             .style("left", (d3.event.pageX) + "px")   
     //             .style("top", (d3.event.pageY - 28) + "px");  
     //         })          
     //     .on("mouseout", function(d) {   
     //         /*ELEMENT*/.transition()    
-    //             .duration(500)    
-    //             .style("opacity", 0); 
+    //             .duration(/*LENGTH*/)    
+    //             .style(/*STYLE*/); 
     //     })
   
   ;
