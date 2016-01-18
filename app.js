@@ -90,7 +90,7 @@ svg.selectAll("dot")
     })
     
     //Add some interactivity! 
-    //Uncomment the block belo and complete the tooltip code!
+    //Uncomment the block below and complete the tooltip code!
     // .on("mouseover", function(/*ARGS*/) {    
     //         /*ELEMENT*/.transition()    
     //             .duration(/*LENGTH*/)    
