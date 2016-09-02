@@ -1,0 +1,21 @@
+{
+  "name": "delicious-data",
+  "version": "1.0.0",
+  "description": "Learning Data Viz for FSA/GHA",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "d3",
+    "data",
+    "viz"
+  ],
+  "author": "DAS",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0",
+    "d3": "~3.1.6"
+  }
+}
