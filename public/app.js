@@ -1,8 +1,3 @@
-/*
-  JS for Graph
-  Beginning on line 80, complete the code for a working visualization!
-*/
-
 //Dataset for graph: data strings with arbitrary values attached
 var dataset = [  
                 ['2015-02-01' , 7 ],
@@ -16,18 +11,20 @@ var dataset = [
 //Height and width constants
 var h = 450;
 var w = 750;
-// Set the ranges with native d3 methods
+
+// Set the ranges with native d3 function expressions
 var x = d3.time.scale().range([0, w]);
 var y = d3.scale.linear().range([h, 0]);
 
-//This is a native d3 time formatting function 
+
+//This is a native d3 time formatting function expression 
 //See how it is used in the valueline function on line 64
-//You may read about here: https://github.com/mbostock/d3/wiki/Time-Formatting
+//You may read about here: https://github.com/d3/d3-3.x-api-reference/blob/master/API-Reference.md#d3time-timeatting
 var parseDate = d3.time.format("%Y-%m-%d").parse;
 
 // Scale the range of the data
-x.domain(d3.extent(dataset, function(d) { return parseDate(d[0]); }));
-y.domain([0, d3.max(dataset, function(d) { return d[1]; })]);
+x.domain(d3.extent(dataset, /*CALLBACK METHOD*/));
+y.domain([0, d3.max(dataset, /*CALLBACK METHOD*/);
 
 // Define the axes
 var xAxis = d3.svg.axis().scale(x)
@@ -35,13 +32,6 @@ var xAxis = d3.svg.axis().scale(x)
 
 var yAxis = d3.svg.axis().scale(y)
     .orient("left").ticks(10);
-
-
-//Initializing the divs for tooltips
-//Feel free to try and add these when you have fixed the main chart
-var tooltip = d3.select("body").append("div") 
-    .attr("class", "tooltip")       
-    .style("opacity", 0);
 
 //Append SVG to DOM
 var svg = d3.select(".container")
@@ -52,26 +42,23 @@ var svg = d3.select(".container")
               .attr("transform", "translate(50, 50)");
 
 
-// Add the X Axis
-svg.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0, " + h + ")")
-    .call(xAxis);
-
-
 // Add the Y Axis
 svg.append("g")
     .attr("class", "y axis")
     .call(yAxis);
 
+/*
+  Add the X Axis code here
+*/
+
 // Define the line
 var valueline = d3.svg.line().interpolate("monotone")
+    .y(function(d) { 
+      return y(d[1]); 
+    })
     .x(function(d) { 
       return x(parseDate(d[0])); 
     })
-    .y(function(d) { 
-      return y(d[1]); 
-    });
 
 // Add the valueline path
 //This will tell you if your dots are off
@@ -81,37 +68,17 @@ svg.append("path")
 
 //Use a d3 JOIN here to link data with the graph
 svg.selectAll("dot")
-    .data(dataset)
-    .enter()
-    .append("circle")
-    .attr("r", 7.5)
-    .attr("fill", "red")
-    .attr("cx", function(d) {
-      return x(parseDate(d[0]))
-    })
-    .attr("cy", function(d) {
-      return y(d[1]);
-    })
-
+    /*  
+        Your JOIN chain here
+    */
     
     //Add some interactivity! 
     //Uncomment the block below and complete the tooltip code!
-    .on("mouseover", function(d) {    
-            tooltip.transition()    
-                .duration(300)    
-                .style("opacity", 0.8);    
-            tooltip.html("Pizzas : " + d[1])
-                .style("left", (d3.event.pageX) + "px")   
-                .style("top", (d3.event.pageY - 28) + "px");  
-            })          
-        .on("mouseout", function(d) {   
-            tooltip.transition()    
-                .duration(300)    
-                .style("opacity" , 0); 
-        })
-  
-  ;
+    var tooltip = d3.select("body").append("div") 
+                    .attr("class", "tooltip")       
+                    .style("opacity", 0);
+                    
+    tooltip.on("mouseover", /* Show Tooltip */)          
+    .on("mouseout", /* Hide Tooltip */);
 
 
-
-              
